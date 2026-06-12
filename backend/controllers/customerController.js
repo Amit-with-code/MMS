@@ -1,5 +1,5 @@
 import Customer from "../models/customerModel.js";
-git 
+
 // Create Customer
 export const createCustomer = async (req, res) => {
   try {
