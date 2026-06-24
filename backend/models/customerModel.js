@@ -4,9 +4,7 @@ const customerSchema = new mongoose.Schema(
   {
     customerCode: {
       type: String,
-      required: true,
       unique: true,
-      trim: true,
     },
 
     name: {
@@ -18,7 +16,12 @@ const customerSchema = new mongoose.Schema(
     mobile: {
       type: String,
       required: true,
-      unique: true,
+      trim: true,
+    },
+
+    address: {
+      type: String,
+      required: true,
       trim: true,
     },
 
@@ -28,19 +31,9 @@ const customerSchema = new mongoose.Schema(
       trim: true,
     },
 
-    address: {
-      type: String,
-      trim: true,
-    },
-
     status: {
       type: Boolean,
       default: true,
-    },
-
-    joiningDate: {
-      type: Date,
-      default: Date.now,
     },
   },
   {

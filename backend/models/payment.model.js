@@ -11,6 +11,7 @@ const paymentSchema = new mongoose.Schema(
     amount: {
       type: Number,
       required: true,
+      min: 1,
     },
 
     paymentDate: {
@@ -20,13 +21,18 @@ const paymentSchema = new mongoose.Schema(
 
     paymentMethod: {
       type: String,
-      enum: ["Cash", "UPI", "Bank Transfer"],
+      enum: ["Cash", "UPI", "Bank"],
       default: "Cash",
     },
 
     remarks: {
       type: String,
       trim: true,
+    },
+
+    receivedBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
     },
   },
   {

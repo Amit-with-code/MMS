@@ -1,12 +1,6 @@
 import express from "express";
 
-import {
-  createMilkEntry,
-  getAllMilkEntries,
-  getMilkEntryById,
-  updateMilkEntry,
-  deleteMilkEntry,
-} from "../controllers/milkEntryController.js";
+import {createMilkEntry,getAllMilkEntries,getMilkEntryById,updateMilkEntry,deleteMilkEntry} from "../controllers/milkEntryController.js";
 import authMiddleware from "../middleware/authMiddleware.js";
 
 const router = express.Router();

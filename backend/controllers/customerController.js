@@ -3,14 +3,9 @@ import Customer from "../models/customerModel.js";
 // Create Customer
 export const createCustomer = async (req, res) => {
   try {
-    const { customerCode, name, mobile, area, address } = req.body;
+    const { name, mobile, address, area } = req.body;
 
-    const existingCustomer = await Customer.findOne({
-      $or: [
-        { mobile },
-        { customerCode }
-      ]
-    });
+    const existingCustomer = await Customer.findOne({ mobile });
 
     if (existingCustomer) {
       return res.status(400).json({
@@ -19,12 +14,28 @@ export const createCustomer = async (req, res) => {
       });
     }
 
+    // Find latest customer
+    const lastCustomer = await Customer.findOne()
+      .sort({ createdAt: -1 });
+
+    let customerCode = "CUS0001";
+
+    if (lastCustomer?.customerCode) {
+      const lastNumber = parseInt(
+        lastCustomer.customerCode.replace("CUS", "")
+      );
+
+      customerCode =
+        "CUS" +
+        String(lastNumber + 1).padStart(4, "0");
+    }
+
     const customer = await Customer.create({
       customerCode,
       name,
       mobile,
-      area,
       address,
+      area,
     });
 
     res.status(201).json({
